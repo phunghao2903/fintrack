@@ -16,11 +16,9 @@ class MyPieChart extends StatelessWidget {
       width: w * 0.14,
       child: Stack(
         alignment: Alignment.center,
-       
         children: [
           PieChart(
             swapAnimationDuration: Duration(milliseconds: 800),
-
             PieChartData(
               startDegreeOffset: 45,
               sectionsSpace: 0,

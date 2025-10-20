@@ -3,11 +3,12 @@ import 'dart:math';
 import 'package:fintrack/core/theme/app_colors.dart';
 import 'package:fintrack/core/theme/app_text_styles.dart';
 import 'package:fintrack/core/utils/size_utils.dart';
+import 'package:fintrack/features/home/bloc/home_bloc.dart';
 import 'package:fintrack/features/home/pages/account_item.dart';
 import 'package:fintrack/features/home/pages/my_pie_chart.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -16,6 +17,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+     context.read<HomeBloc>().add(LoadAcountsEvent());
+  }
   final List _list = ['1', '2', '3'];
   @override
   Widget build(BuildContext context) {
@@ -147,13 +152,26 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: Container(
                       height: h * 0.17,
+                      child: BlocBuilder<HomeBloc, HomeState>(
+                        builder: (context, state) {
+                          if(state is HomeLoadedAccount ){
+                            return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state.listAccount.length,
+                            itemBuilder: (context, index) {
+                              final product = state.listAccount[index];
+                              return AccountItem(
+                                images: product.images, 
+                                money: product.money, 
+                                resource: product.resource
+                              );
+                            },
+                          );
 
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return AccountItem();
+                          }else{
+                            return SizedBox();
+                          }
+                          
                         },
                       ),
                     ),
@@ -176,22 +194,23 @@ class _HomePageState extends State<HomePage> {
                     Image.asset("assets/icons/analyst.png"),
                     Image.asset("assets/icons/deposit.png"),
                     Image.asset("assets/icons/buy.png"),
-                    Image.asset("assets/icons/add.png" ),
-                      
+                    Image.asset("assets/icons/add.png"),
                   ],
-
                 ),
               ),
               SizedBox(height: h * 0.02),
               Container(
                 // height: h*0.1,
-                width: w*0.9,
+                width: w * 0.9,
                 decoration: BoxDecoration(
                   color: AppColors.widget,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: h*0.02,vertical: h*0.02),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: h * 0.02,
+                    vertical: h * 0.02,
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -200,12 +219,16 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             "Transaction History",
-                            style: AppTextStyles.body1.copyWith(color: AppColors.white),
+                            style: AppTextStyles.body1.copyWith(
+                              color: AppColors.white,
+                            ),
                           ),
                           Text(
-                             "See All",
-                             style: AppTextStyles.caption.copyWith(color: AppColors.grey),
-                          )
+                            "See All",
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.grey,
+                            ),
+                          ),
                         ],
                       ),
                       Row(
@@ -213,25 +236,29 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             "All",
-                            style: AppTextStyles.body1.copyWith(color: AppColors.main),
+                            style: AppTextStyles.body1.copyWith(
+                              color: AppColors.main,
+                            ),
                           ),
-                          
-                        
+
                           Text(
-                             "Spending",
-                             style: AppTextStyles.body2.copyWith(color: AppColors.grey),
+                            "Spending",
+                            style: AppTextStyles.body2.copyWith(
+                              color: AppColors.grey,
+                            ),
                           ),
                           Text(
-                             "Income",
-                             style: AppTextStyles.body2.copyWith(color: AppColors.grey),
-                          )
+                            "Income",
+                            style: AppTextStyles.body2.copyWith(
+                              color: AppColors.grey,
+                            ),
+                          ),
                         ],
                       ),
                     ],
-                    
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
