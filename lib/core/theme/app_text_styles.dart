@@ -17,7 +17,7 @@ class AppTextStyles {
 
   static final body1 = GoogleFonts.outfit(
     fontSize: 16,
-    fontWeight: FontWeight.normal
+    fontWeight: FontWeight.bold
   );
   static final body2 = GoogleFonts.outfit(
     fontSize: 14,

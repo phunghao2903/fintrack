@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:fintrack/core/theme/app_colors.dart';
 import 'package:fintrack/core/theme/app_text_styles.dart';
 import 'package:fintrack/core/utils/size_utils.dart';
+import 'package:fintrack/features/home/pages/account_item.dart';
+import 'package:fintrack/features/home/pages/my_pie_chart.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final List _list = ['1', '2', '3'];
   @override
   Widget build(BuildContext context) {
     final h = SizeUtils.height(context);
@@ -48,48 +53,44 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      Image.asset("assets/icons/notification.png",)
-                    ],
-                  )
+                  Row(children: [Image.asset("assets/icons/notification.png")]),
                 ],
               ),
-              SizedBox(height: h*0.02,),
+              SizedBox(height: h * 0.02),
               Row(
                 children: [
                   Text(
                     "Balance",
                     style: AppTextStyles.heading1.copyWith(
-                      color: AppColors.white
-
-                    ), 
-                  )
+                      color: AppColors.white,
+                    ),
+                  ),
                 ],
               ),
-              SizedBox(height: h*0.01,), 
+              SizedBox(height: h * 0.01),
               Row(
                 children: [
                   Text(
                     "\$2408.45",
                     style: AppTextStyles.heading1.copyWith(
-                      color: AppColors.main
-
+                      color: AppColors.main,
                     ),
-                  )
+                  ),
                 ],
               ),
-              SizedBox(height: h*0.01,),
+              SizedBox(height: h * 0.01),
               Container(
-                height: h*0.2,
-                width: w*0.9,
+                height: h * 0.2,
+                width: w * 0.9,
                 decoration: BoxDecoration(
                   color: AppColors.widget,
-                  borderRadius: BorderRadius.circular(10)
-                  
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: w*0.05,vertical:h*0.03 ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: w * 0.05,
+                    vertical: h * 0.03,
+                  ),
                   child: Row(
                     children: [
                       Expanded(
@@ -99,52 +100,138 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               "Well done!",
-                              style: AppTextStyles.heading2.copyWith(color: AppColors.white),
-                                          
+                              style: AppTextStyles.heading2.copyWith(
+                                color: AppColors.white,
+                              ),
                             ),
-                            SizedBox(height: h*0.01,),
+                            SizedBox(height: h * 0.01),
                             Text(
                               "Your spending reduced by 2% from last month ",
-                              style: AppTextStyles.caption.copyWith(color: AppColors.grey),
-                                          
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.grey,
+                              ),
                             ),
-                            SizedBox(height: h*0.01,),
+                            SizedBox(height: h * 0.01),
                             Text(
                               "View Details",
-                              style: AppTextStyles.body2.copyWith(color: AppColors.main),
-                                          
+                              style: AppTextStyles.body2.copyWith(
+                                color: AppColors.main,
+                              ),
                             ),
                           ],
-                                          
                         ),
                       ),
                       Expanded(
                         flex: 1,
                         child: Column(
                           children: [
-                            // PieChart(
-                            //   PieChartData(
-                            //     sections: [
-                            //       PieChartSectionData(
-                            //         value: 20,
-                            //         color: AppColors.main
-                            //       )
-                            //     ]
-                            //   )
-                              
+                            MyPieChart(),
+                            // Text(
+                            //   "View Details",
+                            //   style: AppTextStyles.body2.copyWith(
+                            //     color: AppColors.main,
+                            //   ),
                             // ),
                           ],
-                                          
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
+              ),
 
+              SizedBox(height: h * 0.02),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: h * 0.17,
+
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return AccountItem();
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: h * 0.02),
+              Container(
+                height: h * 0.09,
+                width: w * 0.9,
+                decoration: BoxDecoration(
+                  color: AppColors.widget,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset("assets/icons/swap.png"),
+                    Image.asset("assets/icons/analyst.png"),
+                    Image.asset("assets/icons/deposit.png"),
+                    Image.asset("assets/icons/buy.png"),
+                    Image.asset("assets/icons/add.png" ),
+                      
+                  ],
+
+                ),
+              ),
+              SizedBox(height: h * 0.02),
+              Container(
+                // height: h*0.1,
+                width: w*0.9,
+                decoration: BoxDecoration(
+                  color: AppColors.widget,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: h*0.02,vertical: h*0.02),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Transaction History",
+                            style: AppTextStyles.body1.copyWith(color: AppColors.white),
+                          ),
+                          Text(
+                             "See All",
+                             style: AppTextStyles.caption.copyWith(color: AppColors.grey),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "All",
+                            style: AppTextStyles.body1.copyWith(color: AppColors.main),
+                          ),
+                          
+                        
+                          Text(
+                             "Spending",
+                             style: AppTextStyles.body2.copyWith(color: AppColors.grey),
+                          ),
+                          Text(
+                             "Income",
+                             style: AppTextStyles.body2.copyWith(color: AppColors.grey),
+                          )
+                        ],
+                      ),
+                    ],
+                    
+                  ),
+                ),
               )
-
-
-
             ],
           ),
         ),
