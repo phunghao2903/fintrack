@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:fintrack/features/chart/bloc/chart_bloc.dart';
+import 'package:fintrack/features/chart/pages/chart_page.dart';
 import 'package:fintrack/features/home/bloc/home_bloc.dart';
 import 'package:fintrack/features/home/pages/home_page.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +29,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       scrollBehavior: DesktopScrollBehavior(),
-      home: BlocProvider(create: (context) => 
-      HomeBloc(), child: HomePage()),
+      // home: BlocProvider(create: (context) =>
+      // HomeBloc(), child: HomePage()),
+      home: BlocProvider(create: (context) => ChartBloc(), child: ChartPage()),
     );
   }
 }
