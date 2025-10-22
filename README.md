@@ -1,16 +1,7 @@
-# fintrack
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Thêm trang khởi đầu và login
+- Hiện tại t đang chia 5 màn hình này thành 2 phần: onboard ( 3 trang giới thiệu) và auth ( trang ogin và sign up)
+- Khi chạy thì nó chạy đủ cả 5 trang
+- T nghĩ là nếu chạy lần đầu thì chạy đủ cả 5 trang
+- Nếu đã có tài khoản hay thực hiện đăng xuất thì nên hiện trang login luôn
+- Vì thế nên t đang chia để 2 trang
+  
