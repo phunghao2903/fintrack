@@ -55,7 +55,8 @@ class SummaryCard extends StatelessWidget {
               Text(
                 "${change >= 0 ? '+' : ''}${change.toStringAsFixed(1)}%",
                 style: AppTextStyles.body2.copyWith(
-                  color: change >= 0 ? Colors.greenAccent : Colors.redAccent,
+                  color: AppColors.grey,
+                  // color: change >= 0 ? Colors.greenAccent : Colors.redAccent,
                   fontWeight: FontWeight.bold,
                 ),
               ),

@@ -25,13 +25,27 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     scrollBehavior: DesktopScrollBehavior(),
+  //     home: BlocProvider(create: (context) =>
+  //     HomeBloc(), child: HomePage()),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      scrollBehavior: DesktopScrollBehavior(),
-      // home: BlocProvider(create: (context) =>
-      // HomeBloc(), child: HomePage()),
-      home: BlocProvider(create: (context) => ChartBloc(), child: ChartPage()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ChartBloc()),
+        BlocProvider(create: (context) => HomeBloc()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        scrollBehavior: DesktopScrollBehavior(),
+        home: ChartPage(),
+      ),
     );
   }
 }
