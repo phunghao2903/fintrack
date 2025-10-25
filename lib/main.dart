@@ -1,14 +1,10 @@
 import 'dart:ui';
 
-import 'package:fintrack/features/home/bloc/home_bloc.dart';
-import 'package:fintrack/bloc/expenses_bloc/expenses_bloc.dart';
-import 'package:fintrack/features/chart/expenses/expenses_page.dart';
-import 'package:fintrack/features/home/pages/home_page.dart';
-import 'package:fintrack/core/theme/app_colors.dart';
+import 'package:fintrack/features/expenses/bloc/expenses_bloc.dart';
+import 'package:fintrack/features/expenses/pages/expenses_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());

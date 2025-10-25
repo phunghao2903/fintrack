@@ -1,5 +1,5 @@
 // Widget cho danh sách chi tiêu
-import 'package:fintrack/features/chart/expenses/expenses_data.dart';
+import 'package:fintrack/features/expenses/datasources/expenses_data.dart';
 import 'package:flutter/material.dart';
 
 // Chấp nhận danh sách chi tiêu từ bên ngoài thay vì sử dụng danh sách tĩnh

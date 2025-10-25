@@ -1,7 +1,7 @@
+import 'package:fintrack/features/expenses/bloc/expenses_event.dart';
+import 'package:fintrack/features/expenses/bloc/expenses_state.dart';
+import 'package:fintrack/features/expenses/datasources/expenses_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fintrack/bloc/expenses_bloc/expenses_event.dart';
-import 'package:fintrack/bloc/expenses_bloc/expenses_state.dart';
-import 'package:fintrack/features/chart/expenses/expenses_data.dart';
 
 class ExpensesBloc extends Bloc<ExpensesEvent, ExpensesState> {
   ExpensesBloc() : super(ExpensesInitial()) {

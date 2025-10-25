@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:fintrack/features/chart/expenses/expenses_data.dart';
+import 'package:fintrack/features/expenses/datasources/expenses_data.dart';
 
 abstract class ExpensesState extends Equatable {
   const ExpensesState();
