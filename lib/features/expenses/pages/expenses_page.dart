@@ -1,13 +1,12 @@
-import 'package:fintrack/features/chart/expenses/expenses_data.dart';
+import 'package:fintrack/features/expenses/bloc/expenses_bloc.dart';
+import 'package:fintrack/features/expenses/bloc/expenses_event.dart';
+import 'package:fintrack/features/expenses/bloc/expenses_state.dart';
+import 'package:fintrack/features/expenses/pages/build_chart_section.dart';
+import 'package:fintrack/features/expenses/pages/build_expenses_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fintrack/core/theme/app_colors.dart';
 import 'package:fintrack/core/utils/size_utils.dart';
-import 'package:fintrack/features/chart/expenses/build_expenses_list.dart';
-import 'package:fintrack/features/chart/expenses/build_chart_section.dart';
-import 'package:fintrack/bloc/expenses_bloc/expenses_bloc.dart';
-import 'package:fintrack/bloc/expenses_bloc/expenses_event.dart';
-import 'package:fintrack/bloc/expenses_bloc/expenses_state.dart';
 
 class ExpensesPage extends StatefulWidget {
   const ExpensesPage({super.key});

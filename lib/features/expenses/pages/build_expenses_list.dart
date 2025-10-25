@@ -1,5 +1,4 @@
 // Widget cho danh sách chi tiêu
-import 'package:fintrack/core/theme/app_colors.dart';
 import 'package:fintrack/features/chart/expenses/expenses_data.dart';
 import 'package:flutter/material.dart';
 
