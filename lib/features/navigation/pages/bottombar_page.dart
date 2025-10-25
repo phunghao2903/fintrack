@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:fintrack/core/theme/app_colors.dart';
 import 'package:fintrack/core/utils/size_utils.dart';
+import 'package:fintrack/features/auth/pages/sign_up_page.dart';
 import 'package:fintrack/features/home/bloc/home_bloc.dart';
 import 'package:fintrack/features/home/pages/home_page.dart';
 import 'package:fintrack/features/navigation/bloc/bottom_bloc.dart';
@@ -17,7 +18,8 @@ class BottombarPage extends StatelessWidget {
     final w = SizeUtils.width(context);
     final List<Widget> _page = [
       BlocProvider(create: (context) => HomeBloc(), child: HomePage()),
-      BlocProvider(create: (context) => HomeBloc(), child: HomePage()),
+      // BlocProvider(create: (context) => HomeBloc(), child: HomePage()),
+      SignUpPage(),
       BlocProvider(create: (context) => HomeBloc(), child: HomePage()),
       BlocProvider(create: (context) => HomeBloc(), child: HomePage()),
     ];

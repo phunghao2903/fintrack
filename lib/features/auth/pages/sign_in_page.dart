@@ -4,6 +4,7 @@ import 'package:fintrack/core/utils/size_utils.dart';
 import 'package:fintrack/features/auth/pages/sign_up_page.dart';
 import 'package:fintrack/features/auth/widgets/auth_widgets.dart';
 import 'package:fintrack/features/home/pages/home_page.dart';
+import 'package:fintrack/features/navigation/pages/bottombar_page.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatefulWidget {
@@ -155,27 +156,32 @@ class _SignInPageState extends State<SignInPage> {
                 // Sign in button
                 CustomButton(
                   label: 'Sign in',
-                  onPressed: _isFormValid()
-                      ? () {
-                          // Navigate to home
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePage(),
-                            ),
-                          );
-                        }
-                      : null,
-                  isEnabled: _isFormValid(),
+                  // onPressed: _isFormValid()
+                  //     ? () {
+                  //         // Navigate to home
+                  //         Navigator.pushReplacement(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //             builder: (context) => BottombarPage(),
+                  //           ),
+                  //         );
+                  //       }
+                  //     : null,
+                  // isEnabled: _isFormValid(),
+                  onPressed: () {
+                    // Navigate to home
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => BottombarPage()),
+                    );
+                  },
                 ),
                 SizedBox(height: SizeUtils.height(context) * 0.03),
                 // Or continue with
                 Row(
                   children: [
                     Expanded(
-                      child: Divider(
-                        color: AppColors.grey.withOpacity(0.3),
-                      ),
+                      child: Divider(color: AppColors.grey.withOpacity(0.3)),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -188,9 +194,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     Expanded(
-                      child: Divider(
-                        color: AppColors.grey.withOpacity(0.3),
-                      ),
+                      child: Divider(color: AppColors.grey.withOpacity(0.3)),
                     ),
                   ],
                 ),
@@ -204,7 +208,7 @@ class _SignInPageState extends State<SignInPage> {
                       label: 'Google',
                       onPressed: () {
                         // TODO: Implement social login
-                        // Chỗ này sẽ là chỗ làm thêm cho trang đăng nhập bằng gg 
+                        // Chỗ này sẽ là chỗ làm thêm cho trang đăng nhập bằng gg
                       },
                     ),
                     const SizedBox(width: 16),

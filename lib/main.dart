@@ -8,6 +8,7 @@ import 'dart:ui';
 // import 'package:fintrack/features/home/pages/home_page.dart';
 // import 'package:fintrack/features/navigation/pages/bottombar_page.dart';
 // >>>>>>> a9063fc (feature: bottom_bar)
+import 'package:fintrack/features/auth/pages/sign_in_page.dart';
 import 'package:fintrack/features/navigation/pages/bottombar_page.dart';
 
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: const OnboardingPage1(),
 // =======
-      home: BottombarPage()
+      home: SignInPage()
 // >>>>>>> a9063fc (feature: bottom_bar)
 
     );
