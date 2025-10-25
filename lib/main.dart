@@ -1,9 +1,14 @@
 import 'dart:ui';
 
-import 'package:fintrack/features/expenses/bloc/expenses_bloc.dart';
-import 'package:fintrack/features/expenses/pages/expenses_page.dart';
+// <<<<<<< HEAD
+// import 'package:fintrack/features/onboarding/pages/onboarding_page_1.dart';
+// =======
+// import 'package:fintrack/features/home/bloc/home_bloc.dart';
+// import 'package:fintrack/features/home/pages/home_page.dart';
+// import 'package:fintrack/features/navigation/pages/bottombar_page.dart';
+// >>>>>>> a9063fc (feature: bottom_bar)
+import 'package:fintrack/features/navigation/pages/bottombar_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 
 void main() {
@@ -25,12 +30,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return MaterialApp(
       scrollBehavior: DesktopScrollBehavior(),
-      home: BlocProvider(
-        create: (context) => ExpensesBloc(),
-        child: ExpensesPage(),
-      ),
+// <<<<<<< HEAD
+      debugShowCheckedModeBanner: false,
+      // home: const OnboardingPage1(),
+// =======
+      home: BottombarPage()
+// >>>>>>> a9063fc (feature: bottom_bar)
     );
   }
 }
