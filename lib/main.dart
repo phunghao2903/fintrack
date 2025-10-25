@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+
 // <<<<<<< HEAD
 // import 'package:fintrack/features/onboarding/pages/onboarding_page_1.dart';
 // =======
@@ -8,6 +9,7 @@ import 'dart:ui';
 // import 'package:fintrack/features/navigation/pages/bottombar_page.dart';
 // >>>>>>> a9063fc (feature: bottom_bar)
 import 'package:fintrack/features/navigation/pages/bottombar_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 
@@ -28,8 +30,18 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     scrollBehavior: DesktopScrollBehavior(),
+  //     home: BlocProvider(create: (context) =>
+  //     HomeBloc(), child: HomePage()),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
+
    
     return MaterialApp(
       scrollBehavior: DesktopScrollBehavior(),
@@ -39,6 +51,7 @@ class MyApp extends StatelessWidget {
 // =======
       home: BottombarPage()
 // >>>>>>> a9063fc (feature: bottom_bar)
+
     );
   }
 }
