@@ -1,3 +1,4 @@
+import 'package:fintrack/core/theme/app_text_styles.dart';
 import 'package:fintrack/features/expenses/bloc/expenses_bloc.dart';
 import 'package:fintrack/features/expenses/bloc/expenses_event.dart';
 import 'package:fintrack/features/expenses/bloc/expenses_state.dart';
@@ -46,7 +47,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('Lỗi: ${state.message}'),
-                  backgroundColor: Colors.red,
+                  backgroundColor: AppColors.red,
                 ),
               );
             }
@@ -55,7 +56,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Không tìm thấy khoản chi tiêu nào'),
-                  backgroundColor: Colors.orange,
+                  backgroundColor: AppColors.orange,
                 ),
               );
             }
@@ -72,13 +73,13 @@ class _ExpensesPageState extends State<ExpensesPage> {
                   children: [
                     const Icon(
                       Icons.error_outline,
-                      color: Colors.red,
+                      color: AppColors.red,
                       size: 48,
                     ),
                     const SizedBox(height: 16),
                     Text(
                       'Đã xảy ra lỗi: ${state.message}',
-                      style: const TextStyle(color: Colors.red),
+                      style: const TextStyle(color: AppColors.red),
                     ),
                     const SizedBox(height: 16),
                     ElevatedButton(
@@ -122,18 +123,14 @@ class _ExpensesPageState extends State<ExpensesPage> {
               },
               child: const Icon(
                 Icons.arrow_back,
-                color: Colors.white,
+                color: AppColors.white,
                 size: 18,
               ),
             ),
             const SizedBox(width: 16),
-            const Text(
+            Text(
               "Expenses",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontSize: 18,
-              ),
+              style: AppTextStyles.heading2.copyWith(color: AppColors.white),
             ),
           ],
         ),
@@ -143,8 +140,8 @@ class _ExpensesPageState extends State<ExpensesPage> {
           padding: const EdgeInsets.only(bottom: 20, top: 20),
           child: TextField(
             controller: _searchController,
-            style: const TextStyle(color: Colors.white),
-            cursorColor: Colors.white,
+            style: const TextStyle(color: AppColors.white),
+            cursorColor: AppColors.white,
             // Thêm sự kiện onSubmitted để xử lý khi người dùng nhấn Enter
             onSubmitted: (value) {
               context.read<ExpensesBloc>().add(SearchExpenses(value));
@@ -153,7 +150,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
               // prefixIcon: const Icon(Icons.search, color: Colors.white70),
               // Thêm icon tìm kiếm bên phải có thể nhấn để tìm kiếm
               suffixIcon: IconButton(
-                icon: const Icon(Icons.search, color: Colors.white70),
+                icon: const Icon(Icons.search, color: AppColors.white),
                 onPressed: () {
                   // Gửi sự kiện tìm kiếm khi nhấn vào icon
                   context.read<ExpensesBloc>().add(
@@ -161,15 +158,10 @@ class _ExpensesPageState extends State<ExpensesPage> {
                   );
                 },
               ),
-              hintText: "Nhập để tìm kiếm, nhấn Enter để gửi",
-              hintStyle: const TextStyle(color: Colors.white70),
+              hintText: "Search",
+              hintStyle: const TextStyle(color: AppColors.grey),
               filled: true,
-              fillColor: const Color.fromARGB(
-                111,
-                121,
-                116,
-                116,
-              ).withOpacity(0.2),
+              fillColor: AppColors.widget,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide.none,
@@ -199,7 +191,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
                     Text(
                       category,
                       style: TextStyle(
-                        color: isSelected ? AppColors.main : Colors.white70,
+                        color: isSelected ? AppColors.main : AppColors.grey,
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
@@ -208,7 +200,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
                     Container(
                       height: 1,
                       width: 40,
-                      color: isSelected ? AppColors.main : Colors.transparent,
+                      color: isSelected ? AppColors.main : AppColors.background,
                     ),
                   ],
                 ),
@@ -223,7 +215,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
             child: Column(
               children: [
                 // Biểu đồ và chú giải với dữ liệu từ BLoC
-                buildChartSection(state.totalValue),
+                buildChartSection(state.expenses, state.totalValue),
                 const SizedBox(height: 20),
                 // Custom widget để hiển thị danh sách chi tiêu từ BLoC
                 state.expenses.isEmpty

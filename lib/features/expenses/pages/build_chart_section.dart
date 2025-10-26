@@ -1,69 +1,92 @@
-// Widget cho biểu đồ và chú giải
 import 'dart:math' as math;
 import 'package:fintrack/core/theme/app_colors.dart';
 import 'package:fintrack/features/expenses/datasources/expenses_data.dart';
 import 'package:flutter/material.dart';
 
-Widget buildChartSection(double? totalValue) {
+// Widget cho biểu đồ và chú giải
+Widget buildChartSection(List<ExpenseData> expenses, double totalValue) {
   return Row(
-    crossAxisAlignment: CrossAxisAlignment.end,
-    mainAxisAlignment: MainAxisAlignment.end,
+    crossAxisAlignment: CrossAxisAlignment.center,
     children: [
+      // Biểu đồ tròn
       SizedBox(
         width: 150,
         height: 150,
         child: Stack(
           alignment: Alignment.center,
           children: [
+            // Custom painter để vẽ biểu đồ
             CustomPaint(
               size: const Size(150, 150),
               painter: PieChartPainter(expenses: expenses),
             ),
-            // Hiển thị tổng giá trị đã được tính toán
-            Text(
-              "\$${(totalValue ?? 0.0).toStringAsFixed(2)}\nTotal",
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
+            // Text hiển thị tổng giá trị ở giữa
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "\$${totalValue.toStringAsFixed(2)}",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                const Text(
+                  "Total",
+                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                ),
+              ],
             ),
           ],
         ),
       ),
-      const SizedBox(width: 40),
+      const SizedBox(width: 20),
       // Chú giải
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: expenses
-              .map(
-                (e) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                          color: e.color,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        e.name,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
+          children: expenses.map((expense) {
+            // Tính phần trăm cho từng khoản chi
+            final percentage = totalValue > 0
+                ? (expense.value / totalValue * 100).toStringAsFixed(1)
+                : '0.0';
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: Row(
+                children: [
+                  // Ô màu đại diện
+                  Container(
+                    width: 12,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      color: expense.color,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
                   ),
-                ),
-              )
-              .toList(),
+                  const SizedBox(width: 8),
+                  // Tên khoản chi
+                  Expanded(
+                    child: Text(
+                      expense.name,
+                      style: const TextStyle(color: Colors.white, fontSize: 14),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  // Phần trăm
+                  Text(
+                    "$percentage%",
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }).toList(),
         ),
       ),
     ],
@@ -78,20 +101,55 @@ class PieChartPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    double total = expenses.fold(0, (sum, item) => sum + item.value);
-    if (total == 0) return; // Tránh chia cho 0
+    // Tính tổng giá trị
+    double total = expenses.fold(0.0, (sum, item) => sum + item.value);
+
+    if (total == 0) {
+      // Nếu không có dữ liệu, vẽ vòng tròn xám
+      final paint = Paint()
+        ..style = PaintingStyle.fill
+        ..color = Colors.grey[800]!;
+
+      final center = Offset(size.width / 2, size.height / 2);
+      final radius = math.min(size.width / 2, size.height / 2);
+      canvas.drawCircle(center, radius, paint);
+
+      // Vẽ vòng tròn bên trong
+      final innerCirclePaint = Paint()
+        ..color = AppColors.background
+        ..style = PaintingStyle.fill;
+      canvas.drawCircle(center, radius * 0.6, innerCirclePaint);
+      return;
+    }
+
+    // Bắt đầu vẽ từ góc 270 độ (12 giờ)
     double startAngle = -math.pi / 2;
 
     final center = Offset(size.width / 2, size.height / 2);
     final radius = math.min(size.width / 2, size.height / 2);
     final rect = Rect.fromCircle(center: center, radius: radius);
 
+    // Vẽ từng phần của biểu đồ
     for (var expense in expenses) {
+      // Tính góc quét dựa trên tỷ lệ phần trăm
+      // Tổng góc là 2π (360 độ = 100%)
       final sweepAngle = (expense.value / total) * 2 * math.pi;
+
+      // Tạo paint cho phần này
       final paint = Paint()
         ..style = PaintingStyle.fill
         ..color = expense.color;
-      canvas.drawArc(rect, startAngle, sweepAngle, true, paint);
+
+      // Vẽ cung tròn
+      canvas.drawArc(
+        rect,
+        startAngle,
+        sweepAngle,
+        true, // useCenter = true để vẽ hình quạt
+        paint,
+      );
+
+      // Cập nhật góc bắt đầu cho phần tiếp theo
       startAngle += sweepAngle;
     }
 
@@ -103,7 +161,8 @@ class PieChartPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true; // Vẽ lại khi dữ liệu thay đổi
+  bool shouldRepaint(covariant PieChartPainter oldDelegate) {
+    // Chỉ vẽ lại khi dữ liệu thay đổi
+    return oldDelegate.expenses != expenses;
   }
 }
