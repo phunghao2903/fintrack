@@ -46,12 +46,11 @@ class MyApp extends StatelessWidget {
    
     return MaterialApp(
       scrollBehavior: DesktopScrollBehavior(),
-// <<<<<<< HEAD
+
       debugShowCheckedModeBanner: false,
-      // home: const OnboardingPage1(),
-// =======
+
       home: SignInPage()
-// >>>>>>> a9063fc (feature: bottom_bar)
+
 
     );
   }
