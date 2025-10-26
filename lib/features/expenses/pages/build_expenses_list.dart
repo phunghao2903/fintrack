@@ -1,4 +1,5 @@
 // Widget cho danh sách chi tiêu
+import 'package:fintrack/core/theme/app_colors.dart';
 import 'package:fintrack/features/expenses/datasources/expenses_data.dart';
 import 'package:flutter/material.dart';
 
@@ -19,17 +20,8 @@ Widget buildExpenseListItem(ExpenseData expense) {
     child: Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF212121), // Màu nền của toàn bộ item
+        color: AppColors.widget, // Màu nền của toàn bộ item
         borderRadius: BorderRadius.circular(10),
-        // Thêm đổ bóng nhẹ để nổi bật item hơn
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 2,
-            offset: const Offset(0, 1),
-          ),
-        ],
       ),
       child: Row(
         children: [
@@ -49,7 +41,7 @@ Widget buildExpenseListItem(ExpenseData expense) {
             child: Text(
               expense.name,
               style: const TextStyle(
-                color: Colors.white,
+                color: AppColors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
@@ -65,7 +57,7 @@ Widget buildExpenseListItem(ExpenseData expense) {
                 Text(
                   expense.amount,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: AppColors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -79,8 +71,8 @@ Widget buildExpenseListItem(ExpenseData expense) {
                       expense.percentage,
                       style: TextStyle(
                         color: expense.isUp
-                            ? Colors.greenAccent
-                            : Colors.redAccent,
+                            ? AppColors.main
+                            : AppColors.brightOrange,
                         fontSize: 14,
                       ),
                     ),
@@ -88,8 +80,8 @@ Widget buildExpenseListItem(ExpenseData expense) {
                     Icon(
                       expense.isUp ? Icons.arrow_upward : Icons.arrow_downward,
                       color: expense.isUp
-                          ? Colors.greenAccent
-                          : Colors.redAccent,
+                          ? AppColors.main
+                          : AppColors.brightOrange,
                       size: 16,
                     ),
                   ],
@@ -109,11 +101,11 @@ Widget buildEmptyExpenseList() {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(Icons.search_off, color: Colors.grey, size: 50),
+        const Icon(Icons.search_off, color: AppColors.grey, size: 50),
         const SizedBox(height: 16),
         Text(
           "Không tìm thấy khoản chi tiêu nào",
-          style: TextStyle(color: Colors.grey[400], fontSize: 16),
+          style: TextStyle(color: AppColors.grey, fontSize: 16),
         ),
       ],
     ),
