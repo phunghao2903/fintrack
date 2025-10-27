@@ -51,7 +51,6 @@ class ChartView extends StatelessWidget {
     return Container(
       width: w * 0.9,
       height: h * 0.25,
-      // padding: EdgeInsets.all(w * 0.05),
       padding: EdgeInsets.fromLTRB(w * 0.02, w * 0.01, w * 0.05, w * 0.01),
       decoration: BoxDecoration(
         color: AppColors.widget,
