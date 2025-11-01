@@ -9,28 +9,28 @@ class NotificationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final notifications = [
       NotificationItem(
-        icon: Icons.account_balance_wallet_outlined,
+        iconPath: 'assets/icons/new_transaction.png',
         title: 'New Transaction',
         time: 'Today | 8:21 AM',
         description: 'You received a payment of \$50',
         isUnread: true,
       ),
       NotificationItem(
-        icon: Icons.calendar_today_outlined,
+        iconPath: 'assets/icons/bill_reminder.png',
         title: 'Bill Reminder',
         time: 'Today | 10:42 AM',
         description: 'Don\'t forget to pay your electricity bill by the end of the week',
         isUnread: true,
       ),
       NotificationItem(
-        icon: Icons.bar_chart_outlined,
+        iconPath: 'assets/icons/alert.png',
         title: 'Budget Alert',
         time: '1 day ago | 11:42 PM',
         description: 'You\'ve exceeded 90% of your monthly budget for "Groceries"',
         isUnread: true,
       ),
       NotificationItem(
-        icon: Icons.receipt_long_outlined,
+        iconPath: 'assets/icons/alert.png',
         title: 'Expense Alert',
         time: '2 days ago | 11:25 PM',
         description: 'Your recent grocery expense was higher than usual. Review your spending.',
@@ -91,18 +91,11 @@ class NotificationsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Icon
-          Container(
+          Image.asset(
+            notification.iconPath,
             width: 48,
             height: 48,
-            decoration: BoxDecoration(
-              color: AppColors.orange,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(
-              notification.icon,
-              color: AppColors.white,
-              size: 24,
-            ),
+            fit: BoxFit.contain,
           ),
           const SizedBox(width: 12),
           
@@ -171,14 +164,14 @@ class NotificationsScreen extends StatelessWidget {
 }
 
 class NotificationItem {
-  final IconData icon;
+  final String iconPath;
   final String title;
   final String time;
   final String description;
   final bool isUnread;
 
   NotificationItem({
-    required this.icon,
+    required this.iconPath,
     required this.title,
     required this.time,
     required this.description,

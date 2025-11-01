@@ -52,34 +52,26 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           icon: Icon(Icons.arrow_back_ios, color: AppColors.white, size: 20),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Row(
-          children: [
-            Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                color: AppColors.widget,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Icon(
-                Icons.auto_awesome,
-                color: AppColors.main,
-                size: 18,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              'AI Chat',
-              style: AppTextStyles.body1.copyWith(
-                color: AppColors.white,
-                fontSize: 16,
-              ),
-            ),
-          ],
+        title: Text(
+          'AI Chat',
+          style: AppTextStyles.body1.copyWith(
+            color: AppColors.white,
+            fontSize: 16,
+          ),
         ),
       ),
       body: Column(
         children: [
+          // AI Logo - Below AppBar
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Image.asset(
+              'assets/icons/AI_logo.png',
+              width: 40,
+              height: 40,
+            ),
+          ),
+          
           // Messages List
           Expanded(
             child: ListView.builder(
@@ -171,15 +163,29 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Avatar
-          CircleAvatar(
-            radius: 18,
-            backgroundColor: message.isUser ? AppColors.orange : AppColors.widget,
-            child: Icon(
-              message.isUser ? Icons.person : Icons.auto_awesome,
-              color: message.isUser ? AppColors.white : AppColors.main,
-              size: 18,
-            ),
-          ),
+          message.isUser
+              ? CircleAvatar(
+                  radius: 18,
+                  backgroundColor: AppColors.widget,
+                  child: ClipOval(
+                    child: Image.asset(
+                      'assets/icons/avatar_logo.png',
+                      width: 36,
+                      height: 36,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
+              : CircleAvatar(
+                  radius: 18,
+                  backgroundColor: AppColors.widget,
+                  child: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Image.asset(
+                      'assets/icons/AI_logo.png',
+                    ),
+                  ),
+                ),
           const SizedBox(width: 10),
           
           // Message Content
@@ -221,7 +227,12 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   const SizedBox(height: 10),
                   OutlinedButton.icon(
                     onPressed: () {},
-                    icon: Icon(Icons.refresh, size: 14, color: AppColors.grey),
+                    icon: Image.asset(
+                      'assets/icons/regenerate.png',
+                      width: 14,
+                      height: 14,
+                      color: AppColors.grey,
+                    ),
                     label: Text(
                       'Regenerate',
                       style: AppTextStyles.caption.copyWith(

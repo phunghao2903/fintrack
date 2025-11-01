@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:fintrack/core/theme/app_colors.dart';
 import 'package:fintrack/core/theme/app_text_styles.dart';
@@ -18,16 +17,27 @@ class AIChatScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
             backgroundColor: AppColors.widget,
-            child: Icon(Icons.person, color: AppColors.white),
+            child: ClipOval(
+              child: Image.asset(
+                'assets/icons/avatar_logo.png',
+                width: 40,
+                height: 40,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
         ),
         title: Text(
-          'Phung Thanh Hao',
+          'Phung-Hao',
           style: AppTextStyles.body1.copyWith(color: AppColors.white),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications_outlined, color: AppColors.white),
+            icon: Image.asset(
+              'assets/icons/notification.png',
+              width: 24,
+              height: 24,
+            ),
             onPressed: () {
               // Navigate to notifications screen
             },
@@ -43,20 +53,11 @@ class AIChatScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // AI Logo ( khong tim duoc logo chatgpt)
-                  Container(
+                  // AI Logo
+                  Image.asset(
+                    'assets/icons/AI_logo.png',
                     width: 120,
                     height: 120,
-                    child: CustomPaint(
-                      painter: HexagonPainter(color: AppColors.main),
-                      child: Center(
-                        child: Icon(
-                          Icons.auto_awesome,
-                          size: 50,
-                          color: AppColors.main,
-                        ),
-                      ),
-                    ),
                   ),
                   const SizedBox(height: 32),
                   
@@ -196,42 +197,4 @@ class AIChatScreen extends StatelessWidget {
       
     );
   }
-}
-
-// Custom Painter for Hexagon Shape
-class HexagonPainter extends CustomPainter {
-  final Color color;
-
-  HexagonPainter({required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.5;
-
-    final path = Path();
-    final centerX = size.width / 2;
-    final centerY = size.height / 2;
-    final radius = size.width * 0.3;
-
-    for (int i = 0; i < 6; i++) {
-      final angle = (60 * i - 30) * math.pi / 180;
-      final x = centerX + radius * math.cos(angle);
-      final y = centerY + radius * math.sin(angle);
-      
-      if (i == 0) {
-        path.moveTo(x, y);
-      } else {
-        path.lineTo(x, y);
-      }
-    }
-    path.close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
