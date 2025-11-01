@@ -20,11 +20,7 @@ class BottomNavItem extends StatelessWidget {
             iconName,
             color: isActive ? AppColors.main : AppColors.white,
           ),
-          // Text(
-          //    label,
-          //    style:  AppTextStyles.body2.copyWith(color: isActive ? AppColors.main : AppColors.white,)
-          //   //  TextStyle(color:  isActive ? AppColors.main : AppColors.white,),
-          // )
+          
         ],
       ),
     );
