@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-
 // <<<<<<< HEAD
 // import 'package:fintrack/features/onboarding/pages/onboarding_page_1.dart';
 // =======
@@ -42,16 +41,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-   
     return MaterialApp(
       scrollBehavior: DesktopScrollBehavior(),
 
       debugShowCheckedModeBanner: false,
 
-      home: SignInPage()
-
-
+      home: SignInPage(),
     );
   }
 }

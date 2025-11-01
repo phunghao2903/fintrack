@@ -28,7 +28,6 @@ class _HomePageState extends State<HomePage> {
   final List _list = ['1', '2', '3'];
   @override
   Widget build(BuildContext context) {
-    
     final h = SizeUtils.height(context);
     final w = SizeUtils.width(context);
     return Scaffold(
@@ -300,7 +299,8 @@ class _HomePageState extends State<HomePage> {
                                   Image.asset("assets/icons/taxi.png"),
                                   SizedBox(width: w * 0.03),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Taxi",
@@ -320,12 +320,10 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Row(
                                 children: [
-                                  
                                   SizedBox(width: w * 0.03),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      
                                       Text(
                                         "-\$15",
                                         style: AppTextStyles.body2.copyWith(
@@ -342,8 +340,6 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ],
                               ),
-
-                            
                             ],
                           ),
                           SizedBox(height: h * 0.02),
@@ -353,24 +349,18 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(height: h * 0.02),
                           Divider(),
                           SizedBox(height: h * 0.02),
-                          TransactionHistory()
-
-                          
+                          TransactionHistory(),
                         ],
-                        
                       ),
-                      
                     ),
                   ),
                   SizedBox(height: h * 0.02),
-                  
                 ],
               ),
             ],
           ),
         ),
       ),
-     
     );
   }
 }
